@@ -1,6 +1,14 @@
 x = True
 while x == True:
     print('Mad Lib')
+    print(r'''
+          .
+        ":"
+        ___:____   |"\/"|
+    ,'        `.    \  /
+    |  O        \___/  |
+    ~^~^~^~^~^~^~^~^~^~^~^~^~
+    ''')
     place1 = input('Give me a place. ')
     color2 = input('Give me a color. ')
     name3 = input('Give me a name. ')
