@@ -6,7 +6,7 @@ answers = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes – de
 'Very doubtful']
 
 x = True
-while x == True:
+while x:
     input('Ask me a question.')
     print(random.choice(answers))
     y = input('Would you like to play again?: y/n')
