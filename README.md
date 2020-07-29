@@ -9,3 +9,4 @@ Lab solutions for full stack bootcamp.
 - [lab 04](./solutions/lab04magic8ball.py)
 - [lab 05](./solutions/lab05emotegen.py)
 - [lab 06](./solutions/lab06passwordgen.py)
+- [lab 07](./solutions/lab07-rock_paper_scissors.py)
