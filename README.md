@@ -10,3 +10,4 @@ Lab solutions for full stack bootcamp.
 - [lab 05](./solutions/lab05emotegen.py)
 - [lab 06](./solutions/lab06passwordgen.py)
 - [lab 07](./solutions/lab07-rock_paper_scissors.py)
+- [lab 08](./solutions/lab08-num_guesser.py)
