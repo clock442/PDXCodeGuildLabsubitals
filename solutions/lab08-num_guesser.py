@@ -9,7 +9,7 @@ while True:
     last_guess = hum_choice
     last_difference = 0
     difference = abs(comp_choice - hum_choice)
-    while attempts < 10:
+    while attempts <= 10:
         hum_choice = input('Guess a number:   ')
         hum_choice = int(hum_choice)
         difference = abs(hum_choice - comp_choice)
@@ -18,13 +18,16 @@ while True:
             attempts = 11
         elif hum_choice < comp_choice or hum_choice > comp_choice:
             print(f'You have made {attempts} atempts.')
-            if difference > 0:
+            if last_difference == 0:
+                print('That was your first guess.')
+            elif difference > 0:
                 if difference < last_difference:
                     print('You are getting warmer.')
                 elif difference > last_difference:
                     print('You are getting colder.')
                 else:
                     continue
+
         last_difference = difference
         attempts += 1
     if attempts == 10:
