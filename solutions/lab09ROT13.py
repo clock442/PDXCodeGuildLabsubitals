@@ -1,9 +1,9 @@
 import string
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
+alphabet = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+/[]<>?`;:"~*'
 
 def rot(text):
 
-    rotation = int(input('How many letters would you like to rotate the alphabet:    '))%26
+    rotation = int(input('How many letters would you like to rotate the alphabet and special characters:    '))%26
     new_list = []
     text = text.lower()
     for letter in text:
@@ -17,8 +17,8 @@ def rot(text):
     return new_string
 
 while True:
-    print('ROT encodes words you give it by rotating the alphabet.')
-    user_text = input('Type words:   ')
+    print('ROT encodes words you give it by rotating the alphabet and special characters.')
+    user_text = input('Type:   ')
     print(rot(user_text))
     play_again = input('Would you like to encode more? y/n:   ')
     if play_again == 'n':
