@@ -5,12 +5,14 @@ def rot(text):
 
     rotation = int(input('How many letters would you like to rotate the alphabet:    '))%26
     new_list = []
-    text.lower()
+    text = text.lower()
     for letter in text:
-        # new_list.append(text[letter] 
+        if letter == ' ':
+            new_list.append(' ')
         for rot_letter in alphabet:
             if letter == rot_letter:
                 new_list.append(alphabet[alphabet.find(rot_letter) - rotation])
+
     new_string = ''.join(new_list)
     return new_string
 
