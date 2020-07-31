@@ -3,7 +3,7 @@ alphabet = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+/[]<>?`;:"~*'
 
 def rot(text):
 
-    rotation = int(input('How many letters would you like to rotate the alphabet and special characters:    '))%26
+    rotation = int(input('How many letters would you like to rotate the alphabet and special characters:    '))%52
     new_list = []
     text = text.lower()
     for letter in text:
