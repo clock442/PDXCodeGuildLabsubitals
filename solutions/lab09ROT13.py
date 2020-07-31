@@ -15,7 +15,7 @@ def rot(text):
 
 while True:
     print('ROT encodes words you give it by rotating the alphabet.')
-    rotation = int(input('How many letters would you like to rotate the alphabet:    '))
+    rotation = int(input('How many letters would you like to rotate the alphabet:    '))%26
     user_text = input('Type words:   ')
     print(rot(user_text))
     play_again = input('Would you like to encode more? y/n:   ')
