@@ -12,3 +12,4 @@ Lab solutions for full stack bootcamp.
 - [lab 07](./solutions/lab07-rock_paper_scissors.py)
 - [lab 08](./solutions/lab08-num_guesser.py)
 - [lab 09](./solutions/lab09ROT13.py)
+- [lab 10](./solutions/lab10pvs.py)

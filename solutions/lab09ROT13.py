@@ -1,9 +1,10 @@
 import string
-alphabet = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+/[]<>?`;:"~*'
+# alphabet = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+/[]<>?`;:"~*'
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 def rot(text):
 
-    rotation = int(input('How many letters would you like to rotate the alphabet and special characters:    '))%52
+    rotation = int(input('How many letters would you like to rotate the alphabet and special characters:    '))%len(alphabet)
     new_list = []
     text = text.lower()
     for letter in text:
@@ -11,7 +12,7 @@ def rot(text):
             new_list.append(' ')
         for rot_letter in alphabet:
             if letter == rot_letter:
-                new_list.append(alphabet[alphabet.find(rot_letter) - rotation])
+                new_list.append(alphabet[(alphabet.find(rot_letter) - rotation)%len(alphabet)])
 
     new_string = ''.join(new_list)
     return new_string
