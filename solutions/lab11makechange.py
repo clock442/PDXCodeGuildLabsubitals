@@ -1,35 +1,23 @@
-# import string
-# coins = [25, 10, 5, 1]
-# while True:
-#     coin_amounts = [0, 0, 0, 0]
-#     total_cents = float(input('Enter a dollar amount:   '))*100
-#     for i in range(len(coins)):
-#         if total_cents >= coins[i]:
-#             num_coins = total_cents//coins[i]
-#             coin_amounts[i] += num_coins
-#             total_cents -= coins[i]*num_coins
-#     print(f'You would have {int(coin_amounts[0])} quarters, {int(coin_amounts[1])} dimes, {int(coin_amounts[2])} nickels, and {int(coin_amounts[3])} pennies.')
-#     repeat = input('Would you like to make more change? y/n:   ')
-#     if repeat != 'y':
-#         print('Bye Bye')
-#         break
-
 coins = [
-    ('quarter', 25),
-    ('dime', 10),
-    ('nickel', 5),
-    ('penny', 1)
+    ('quarters', 25),
+    ('dimes', 10),
+    ('nickels', 5),
+    ('pennies', 1)
 ]
 while True:
-    coin_amounts = [0, 0, 0, 0]
+    coin_amounts = []
     total_cents = float(input('Enter a dollar amount:   '))*100
     for i in range(len(coins)):
         current_coin_value = coins[i][1]
         if total_cents >= current_coin_value:
             num_coins = total_cents//current_coin_value
-            coin_amounts[i] += num_coins
+            coin_amounts.append(num_coins)
             total_cents -= current_coin_value*num_coins
-    print(f'You would have {int(coin_amounts[0])} quarters, {int(coin_amounts[1])} dimes, {int(coin_amounts[2])} nickels, and {int(coin_amounts[3])} pennies.')
+        else:
+            coin_amounts.append(0)
+    print('You have:')
+    for j in range(len(coin_amounts)):
+        print(f'{int(coin_amounts[j])} {coins[j][0]}')
     repeat = input('Would you like to make more change? y/n:   ')
     if repeat != 'y':
         print('Bye Bye')
