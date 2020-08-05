@@ -24,11 +24,11 @@ while True:
     coin_amounts = [0, 0, 0, 0]
     total_cents = float(input('Enter a dollar amount:   '))*100
     for i in range(len(coins)):
-        current_value = coins[i][1]
-        if total_cents >= current_value:
-            num_coins = total_cents//current_value
+        current_coin_value = coins[i][1]
+        if total_cents >= current_coin_value:
+            num_coins = total_cents//current_coin_value
             coin_amounts[i] += num_coins
-            total_cents -= current_value*num_coins
+            total_cents -= current_coin_value*num_coins
     print(f'You would have {int(coin_amounts[0])} quarters, {int(coin_amounts[1])} dimes, {int(coin_amounts[2])} nickels, and {int(coin_amounts[3])} pennies.')
     repeat = input('Would you like to make more change? y/n:   ')
     if repeat != 'y':
