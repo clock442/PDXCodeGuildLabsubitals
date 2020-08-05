@@ -158,23 +158,34 @@
 # x = (25, 10, 5, 1)
 # (quarter, dime, nickle, penny) = x
 # coins = [25, 10, 5, 1]
-coins = [
-    ('quarter', 25),
-    ('dime', 10),
-    ('nickel', 5),
-    ('penny', 1)
-]
-while True:
-    coin_amounts = [0, 0, 0, 0]
-    total_cents = float(input('Enter a dollar amount:   '))*100
-    for i in range(len(coins)):
-        current_value = coins[i][1]
-        if total_cents >= current_value:
-            num_coins = total_cents//current_value
-            coin_amounts[i] += num_coins
-            total_cents -= current_value*num_coins
-    print(f'You would have {int(coin_amounts[0])} quarters, {int(coin_amounts[1])} dimes, {int(coin_amounts[2])} nickels, and {int(coin_amounts[3])} pennies.')
-    repeat = input('Would you like to make more change? y/n:   ')
-    if repeat != 'y':
-        print('Bye Bye')
-        break
+# coins = [
+#     ('quarter', 25),
+#     ('dime', 10),
+#     ('nickel', 5),
+#     ('penny', 1)
+# ]
+# while True:
+#     coin_amounts = [0, 0, 0, 0]
+#     total_cents = float(input('Enter a dollar amount:   '))*100
+#     for i in range(len(coins)):
+#         current_value = coins[i][1]
+#         if total_cents >= current_value:
+#             num_coins = total_cents//current_value
+#             coin_amounts[i] += num_coins
+#             total_cents -= current_value*num_coins
+#     print(f'You would have {int(coin_amounts[0])} quarters, {int(coin_amounts[1])} dimes, {int(coin_amounts[2])} nickels, and {int(coin_amounts[3])} pennies.')
+#     repeat = input('Would you like to make more change? y/n:   ')
+#     if repeat != 'y':
+#         print('Bye Bye')
+#         break
+
+
+
+def round_pad_zeroes(num, digits=2):
+    num = str(float(round(num, digits)))
+    num += '0'*(digits-len(num)+1+num.index('.'))
+    return num
+
+print(round_pad_zeroes(5, 3)) # 5.000
+print(round_pad_zeroes(3.1415963, 3)) # 3.142
+print(round_pad_zeroes(3.1, 5)) # 3.10000
