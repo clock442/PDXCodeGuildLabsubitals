@@ -14,3 +14,4 @@ Lab solutions for full stack bootcamp.
 - [lab 09](./solutions/lab09ROT13.py)
 - [lab 10](./solutions/lab10pvs.py)
 - [lab 11](./solutions/lab11makechange.py)
+- [lab 12](./solutions/lab12blackjack/py)
