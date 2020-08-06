@@ -181,11 +181,122 @@
 
 
 
-def round_pad_zeroes(num, digits=2):
-    num = str(float(round(num, digits)))
-    num += '0'*(digits-len(num)+1+num.index('.'))
-    return num
+# def round_pad_zeroes(num, digits=2):
+#     num = str(float(round(num, digits)))
+#     num += '0'*(digits-len(num)+1+num.index('.'))
+#     return num
 
-print(round_pad_zeroes(5, 3)) # 5.000
-print(round_pad_zeroes(3.1415963, 3)) # 3.142
-print(round_pad_zeroes(3.1, 5)) # 3.10000
+# print(round_pad_zeroes(5, 3)) # 5.000
+# print(round_pad_zeroes(3.1415963, 3)) # 3.142
+# print(round_pad_zeroes(3.1, 5)) # 3.10000
+
+
+
+
+
+
+def blackjack_advice(current_total, card_add):
+    cards = {
+        'A': 11,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        '10': 10,
+        'J': 10,
+        'Q': 10,
+        'K': 10
+    }
+    # total = cards[card1] + cards[card2]
+    # if total < 17:
+    #     return 'Hit'
+    # elif 16 < total < 21:
+    #     return 'Stay'
+    # elif total == 21:
+    #     return 'Blackjack!'
+    # else:
+    #     return 'Already Busted'
+    # total = cards[card1] + cards[card2]
+    # if total > 21:
+    #     if card1 or card2 == 'A':
+    #         cards['A'] = 1
+    #     else:
+    #         return 'Already busted'
+    # elif total == 21:
+    #     return 'Blackjack!'
+    # elif 16 < total < 21:
+    #     return 'Stay' 
+    # elif total < 17:
+    #     return 'Hit'
+    # else:
+    #     return 'Not Valid'
+
+# while True:
+#     print('Welcome to Blackjack Advice!')
+#     print('Your card choices will be 1 to 9 and J, Q, K, A for the rest.')
+#     card1 = str(input('What is your first card?'))
+#     card2 = str(input('What is your second card?'))
+#     print(blackjack_advice(card1, card2))
+#     repeat = input('Would you like to play again? y/n:   ')
+#     if repeat == 'n':
+#         print('Bye Bye')
+#         break
+cards = {
+        'A': 11,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        '10': 10,
+        'J': 10,
+        'Q': 10,
+        'K': 10
+    }
+
+
+print('Welcome to Blackjack Advice!')
+print('We will start at 0 and you will add cards. I will then tell you if you should hit or stay. Your card choices will be 1 to 9 and J, Q, K, A.')
+value_list = []
+current_total = 0
+while current_total < 22:
+    new_card = input('What card are you adding?:   ')
+    value_list.append(cards[new_card])
+    current_total = sum(value_list)
+    print(f'Current total is {current_total}')
+    if current_total == 21:
+        print('Blackjack!')
+        break
+    elif 16 < current_total < 21:
+        print('Stay')
+    elif current_total < 17:
+        print('Hit')
+    elif current_total > 21:
+        if new_card == 'A':
+            value_list.remove(11)
+            value_list.append(1)
+            continue
+        elif new_card != 'A':
+            print('Bust')
+            break
+    repeat = input('Would you like to continue? y/n:   ')
+    if repeat != 'y':
+        break
+
+
+
+
+
+
+
+
+
+
+
