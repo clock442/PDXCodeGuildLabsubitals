@@ -29,7 +29,7 @@ print('Welcome to unit converter. Your available units are ft, mi, m, and km.')
 while True:
     unit_from = input('What unit would you like to convert from: ')
     unit_to = input('What unit would you like to convert to: ')
-    if unit_from not in list(convert_dict.keys()) or unit_to not in list(convert_dict.keys()):
+    if unit_from not in convert_dict or unit_to not in convert_dict:
         print('Not a valid input')
         continue
     distance = float(input('What is your distance: '))
