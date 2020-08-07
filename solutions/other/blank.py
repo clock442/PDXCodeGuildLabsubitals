@@ -245,58 +245,162 @@ def blackjack_advice(current_total, card_add):
 #     if repeat == 'n':
 #         print('Bye Bye')
 #         break
-cards = {
-        'A': 11,
-        '2': 2,
-        '3': 3,
-        '4': 4,
-        '5': 5,
-        '6': 6,
-        '7': 7,
-        '8': 8,
-        '9': 9,
-        '10': 10,
-        'J': 10,
-        'Q': 10,
-        'K': 10
-    }
+# cards = {
+#         'A': 11,
+#         '2': 2,
+#         '3': 3,
+#         '4': 4,
+#         '5': 5,
+#         '6': 6,
+#         '7': 7,
+#         '8': 8,
+#         '9': 9,
+#         '10': 10,
+#         'J': 10,
+#         'Q': 10,
+#         'K': 10
+#     }
 
 
-print('Welcome to Blackjack Advice!')
-print('We will start at 0 and you will add cards. I will then tell you if you should hit or stay. Your card choices will be 1 to 9 and J, Q, K, A.')
-value_list = []
-current_total = 0
-while current_total < 22:
-    new_card = input('What card are you adding?:   ')
-    value_list.append(cards[new_card])
-    current_total = sum(value_list)
-    print(f'Current total is {current_total}')
-    if current_total == 21:
-        print('Blackjack!')
-        break
-    elif 16 < current_total < 21:
-        print('Stay')
-    elif current_total < 17:
-        print('Hit')
-    elif current_total > 21:
-        if new_card == 'A':
-            value_list.remove(11)
-            value_list.append(1)
-            continue
-        elif new_card != 'A':
-            print('Bust')
-            break
-    repeat = input('Would you like to continue? y/n:   ')
-    if repeat != 'y':
-        break
+# print('Welcome to Blackjack Advice!')
+# print('We will start at 0 and you will add cards. I will then tell you if you should hit or stay. Your card choices will be 1 to 9 and J, Q, K, A.')
+# value_list = []
+# current_total = 0
+# while current_total < 22:
+#     new_card = input('What card are you adding?:   ')
+#     value_list.append(cards[new_card])
+#     current_total = sum(value_list)
+#     print(f'Current total is {current_total}')
+#     if current_total == 21:
+#         print('Blackjack!')
+#         break
+#     elif 16 < current_total < 21:
+#         print('Stay')
+#     elif current_total < 17:
+#         print('Hit')
+#     elif current_total > 21:
+#         if new_card == 'A':
+#             value_list.remove(11)
+#             value_list.append(1)
+#             continue
+#         elif new_card != 'A':
+#             print('Bust')
+#             break
+#     repeat = input('Would you like to continue? y/n:   ')
+#     if repeat != 'y':
+#         break
+
+# Problem 7
+
+# Write a function that takes a dictionary and returns a new dictionary without any values less than 10.
+
+def remove_less_than_10(d):
+    output_dict = {}
+    for key in d:
+        if d[key] > 9:
+            output_dict[key] = d[key]
+    return output_dict
+
+
+
+# print(remove_less_than_10({'a': 5, 'b': 15, 'c': 12})) # {'b': 15, 'c': 12}
+
+# Problem 8
+
+# Write a function to calculate the average of the lists in a dictionary.
+
+def average_values(d):
+    output_dict = {}
+    for key in d:
+        running_total = 0
+        # print(key, d[key])
+        for element in d[key]:
+            # print(element)
+            running_total += element
+        print(running_total)
+        running_total /= len(d[key])
+        output_dict[key] = running_total
+        # output_dict[key] = sum(d[key]) / len(d[key])
+    return output_dict 
+
+
+# print(average_values({'a': [1, 5, 6], 'b': [2, 8], 'c': [3]})) # {'a': 4, 'b': 5, 'c': 3}
+
+# Problem 9
+
+# Write a function that takes two dictionaries and returns a new dictionary with the values from each added together if they have the same key
+
+# def min(a, b):
+#     return a if a < b else b
+# print(min(5, 2)) # 2
+
+# def clamp(v, min, max):
+#     # if v < min:
+#     #     return min
+#     # elif v > max:
+#     #     return max
+#     # return v
+#     return min if v < min else max if v > max else v
+# print(clamp(5, 0, 10)) # 5
+# print(clamp(-5, 0, 10)) # 0
+# print(clamp(15, 0, 10)) # 10
+
+
+def merge_dictionaries(d1, d2):
+
+    # return {key: d1[key] + d2[key] if key in d1 and key in d2 else d1[key] if key in d1 else d2[key] if key in d2 else None for key in sorted(set(list(d1.keys()) + list(d2.keys())))}
+
+
+    # one line ver: empty_dict = d1.copy()
+    output_dict = {}
+    for key in d1:
+        output_dict[key] = d1[key]
+    # print(output_dict)
+
+    for key in d2:
+        # if the key is already in the output:
+        if key in output_dict:
+            # add to the value for that key
+            # print(key, d2[key])
+            output_dict[key] = output_dict[key] + d2[key]
+            
+        else:
+            # add the key:value pair to the dictionary
+            output_dict[key] = d2[key]
+    
+    print(output_dict)
+
+        
+
+
+d1 = {'a': 100, 'b': 200, 'c':300}
+d2 = {'a': 300, 'b': 200, 'd':400}
+print(merge_dictionaries(d1, d2)) # {'a': 400, 'b': 400, 'd': 400, 'c': 300}
 
 
 
 
+# Problem 10 
+
+# Write a function that takes a list of strings and counts of the number of occurances.
+
+def count_votes(votes):
+    output_dict = {}
+    # loop through votes list:
+        # if the element is in the output_dict increment the value there +1
 
 
+        # else:
+            # add the new key:value pair with initial value of 1
+    
 
 
+# {}
+# john   {'john': 1}
+# johnny {'john': 1, 'johnny': 1}
+# john   {'john': 2, 'johnny': 1}
+votes = ['john', 'johnny',  'john', 'jackie', 'jamie', 'jackie', 'jamie', 'jamie', 'john', 'johnny', 'jamie', 'johnny', 'john']
+print(count_votes(votes)) # {'john': 4, 'johnny': 3, 'jackie': 2, 'jamie': 4}
 
 
 
