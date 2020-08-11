@@ -31,7 +31,7 @@ while True:
         '8': 'eighty',
         '9': 'ninety'
     }
-    user_num = int(input('What is your number: '))
+    user_num = input('What is your number: ')
     tens_digit = str(user_num//10)
     ones_digit = str(user_num%10)
     if user_num < 20:
