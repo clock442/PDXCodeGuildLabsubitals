@@ -18,3 +18,4 @@ Lab solutions for full stack bootcamp.
 - [lab 13](./solutions/lab13unitconverter.py)
 - [lab 14](./solutions/lab14n2p.py)
 - [lab 15](./solutions/lab15txtreader.py)
+- [lab 16](./solutions/lab16ari.py)
