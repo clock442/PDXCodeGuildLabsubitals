@@ -47,4 +47,4 @@ ari = math.floor((4.71 * (total_chars/total_words)) + (0.5 *(total_words/total_s
 
 print(f'The ARI for the text is {ari}')
 print('This corresponds to a ' + ari_scale[ari]['grade_level'] + 'level of dificulty.')
-print('That is suitable for an average person of' +ari_scale[ari]['ages'] + 'years old.')
+print('That is suitable for an average person of ' +ari_scale[ari]['ages'] + ' years old.')
