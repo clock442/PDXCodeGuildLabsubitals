@@ -43,7 +43,7 @@ total_words = len(fixed_word_list)
 sentence_list = re.findall(r"\s+[^.!?]*[.!?]", text)
 total_sentences = len(sentence_list)
 
-ari = math.floor((4.71 * (total_chars/total_words)) + (0.5 *(total_words/total_sentences))-21.43)
+ari = math.ceil((4.71 * (total_chars/total_words)) + (0.5 *(total_words/total_sentences))-21.43)
 
 print(f'The ARI for the text is {ari}')
 print('This corresponds to a ' + ari_scale[ari]['grade_level'] + 'level of dificulty.')
