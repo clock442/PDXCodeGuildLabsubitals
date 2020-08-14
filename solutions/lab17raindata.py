@@ -1,4 +1,5 @@
 import requests
+import math
 from datetime import datetime
 import matplotlib.pyplot as plt
 
@@ -32,6 +33,18 @@ for j in range(len(fixed_list)):
 average_daily_rain = all_rain/total_days
 print(f'The average daily rainfall in the Portland area is {average_daily_rain*.01} inches.')
 
+# finding the variance
+root_list = []
+for i in range(len(fixed_list)):
+    zut = (fixed_list[i]['rain'] - average_daily_rain)**2
+    root_list.append(zut)
+root_sum = 0
+for elem in root_list:
+    root_sum += elem
+variance = root_sum/len(root_list)
+standard_deviation = math.sqrt(variance)
+print(f'The variance is {variance*.01} inches. The standard deviation is {standard_deviation*.01} inches.')
+
 # finding the date with the most rainfall
 most_rain_in_day = 0
 most_rain_date = ''
@@ -42,7 +55,7 @@ for k in range(len(fixed_list)):
         most_rain_date = fixed_list[k]['date']
 print(f'The date of the the day with the most rainfall in one day is {most_rain_date} on which {most_rain_in_day*.01} inches of rain fell.')
 
-
+# plot a graph with dates as the x axis and rain levels as the y axis
 x_values = []
 y_values = []
 for i in range(len(fixed_list)):
