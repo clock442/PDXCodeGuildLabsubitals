@@ -20,3 +20,4 @@ Lab solutions for full stack bootcamp.
 - [lab 15](./solutions/lab15txtreader.py)
 - [lab 16](./solutions/lab16ari.py)
 - [lab 17](./solutions/lab17raindata.py)
+- [lab 18](./solutions/lab18atm.py)
