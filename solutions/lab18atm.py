@@ -46,13 +46,15 @@ while True:
         amount = float(input('How much would you like to deposit? '))
         atm.deposit(amount) # call the deposit(amount) method
         print(f'Deposited ${amount}')
-        transactions.append(f'Deposited ${amount}')
+        balance = atm.balance_()
+        transactions.append(f'Deposited ${amount}. Total Funds: ${balance}')
     elif command == 'withdraw':
         amount = float(input('How much would you like '))
         if atm.check_withdrawal(amount): # call the check_withdrawal(amount) method
             atm.withdraw(amount) # call the withdraw(amount) method
             print(f'Withdrew ${amount}')
-            transactions.append(f'Withdrew ${amount}')
+            balance = atm.balance_()
+            transactions.append(f'Withdrew ${amount}. Total Funds: ${balance}')
         else:
             print('Insufficient funds')
     elif command == 'interest':
