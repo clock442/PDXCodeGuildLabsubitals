@@ -13,6 +13,7 @@ while True:
         if data['quotes'][0]['body'] == 'No quotes found':
             print('No quotes found')
             break
+        print(f'Page: {page}')
         for i in range(len(data['quotes'])):
             print(f'''{data['quotes'][i]['author']}: "{data['quotes'][i]['body']}"''')
         nxt_page = input('Would you like to view the next page? y/n:  ')
