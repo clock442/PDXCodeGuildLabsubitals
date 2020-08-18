@@ -10,6 +10,9 @@ while True:
         params = {'filter': keyword, 'page': page, 'Accept': 'application/json'}
         response = requests.get('https://favqs.com/api/quotes', headers=headers, params=params)
         data = response.json()
+        if data['quotes'][0]['body'] == 'No quotes found':
+            print('No quotes found')
+            break
         for i in range(len(data['quotes'])):
             print(f'''{data['quotes'][i]['author']}: "{data['quotes'][i]['body']}"''')
         nxt_page = input('Would you like to view the next page? y/n:  ')
