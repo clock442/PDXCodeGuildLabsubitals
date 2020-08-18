@@ -403,4 +403,10 @@ votes = ['john', 'johnny',  'john', 'jackie', 'jamie', 'jackie', 'jamie', 'jamie
 print(count_votes(votes)) # {'john': 4, 'johnny': 3, 'jackie': 2, 'jamie': 4}
 
 
+x = 0
+y = len(word)
+for i in range(y//2):
+    x += 1
+    y -= 1 -i
 
+    # C:\Users\langs\AppData\Local\Programs\Python\Python38-32\python.exe
