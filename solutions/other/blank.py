@@ -410,3 +410,5 @@ for i in range(y//2):
     y -= 1 -i
 
     # C:\Users\langs\AppData\Local\Programs\Python\Python38-32\python.exe
+
+855df50978dc9afd6bf86579913c9f8b
