@@ -6,7 +6,7 @@ while True:
     keyword = input('enter a keyword to search for quotes:  ')
     keyword = keyword.lower().strip()
     while True:
-        headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
+        headers = {'Authorization': 'Token token=""'}
         params = {'filter': keyword, 'page': page, 'Accept': 'application/json'}
         response = requests.get('https://favqs.com/api/quotes', headers=headers, params=params)
         data = response.json()
