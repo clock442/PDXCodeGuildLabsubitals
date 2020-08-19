@@ -2,7 +2,7 @@
 Lab solutions for full stack bootcamp. 
 
 ## Python Solutions
-- [lab 01 Turtle](./solutions/lab01-turtle.py)
+- [lab 01 Turtle](./solutions/PythonLabs/lab01-turtle.py)
 - [lab 02 Mad Lib](./solutions/lab02madlib.py)
 - [lab 03 Grading](./solutions/lab03grading.py)
 - [lab 04 Magic 8 Ball](./solutions/lab04magic8ball.py)
@@ -21,3 +21,6 @@ Lab solutions for full stack bootcamp.
 - [lab 17 Rain Data](./solutions/lab17raindata.py)
 - [lab 18 ATM](./solutions/lab18atm.py)
 - [lab 19 Quote API](./solutions/lab19quoteapi.py)
+  
+## HTML/CSS Solutions
+- [lab 01 Bio]()
