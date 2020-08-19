@@ -23,4 +23,4 @@ Lab solutions for full stack bootcamp.
 - [lab 19 Quote API](./solutions/PythonLabs/lab19quoteapi.py)
   
 ## HTML/CSS Solutions
-- [lab 01 Bio]()
+- [lab 01 Bio](./solutions/html_css_Labs/lab1.html)
