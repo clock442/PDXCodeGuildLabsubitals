@@ -2,7 +2,7 @@
 Lab solutions for full stack bootcamp. 
 
 ## Solutions
-
+Python Labs
 - [lab 01](./solutions/lab01-turtle.py)
 - [lab 02](./solutions/lab02madlib.py)
 - [lab 03](./solutions/lab03grading.py)
