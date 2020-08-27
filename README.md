@@ -24,3 +24,8 @@ Lab solutions for full stack bootcamp.
   
 ## HTML/CSS Solutions
 - [lab 01 Bio](./solutions/html_css_Labs/lab1.html)
+- [lab 02 Blog](./solutions/html_css_Labs/lab2.html)
+- [lab 03 Company](./solutions/html_css_Labs/lab3company.html)
+
+## Javascript
+- [lab 01 Unit Converter](./solutions/Javascript/lab01.js)
