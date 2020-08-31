@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        Unit Converter
+    </h1>
+    <div>
+        Ths is a unit converter.
+    </div>
+    <input id="input_num" type="text" />
+    <select id="unit_from">
+        <option value="ft" selected>Feet</option>
+        <option value="mi">Miles</option>
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+    </select>
+    <div>
+        to
+    </div>
+    <select id="unit_to">
+        <option value="ft" selected>Feet</option>
+        <option value="mi">Miles</option>
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+    </select>
+    <button id="run_bt">Convert!</button>
+    <div id="output_div"></div>
+
+
+
+
+
+    <script>
+        let input_num = document.querySelector('#input_num')
+        let unit_to = document.querySelector('#unit_to')
+        let unit_from = document.querySelector('#unit_from')
+        let run_bt = document.querySelector('#run_bt')
+        let output_div = document.querySelector('#output_div')
+        let convert_dict = {
+            ft: {
+                ft: 1,
+                mi: 5280,
+                m: 0.3048,
+                km: 0.0003048
+            },
+            mi: {
+                ft: 5280,
+                mi: 1,
+                m: 1609.34,
+                km: 1.60934
+            },
+            m: {
+                ft: 3.28084,
+                mi: 0.000621,
+                m: 1,
+                km: 0.001
+            },
+            km: {
+                ft: 3280.84,
+                mi: 0.621,
+                m: 1000,
+                km: 1
+            }
+        }
+        run_bt.onclick = function () {
+            let user_num = parseInt(input_num.value)
+            let output_text = user_num * convert_dict[unit_from.value][unit_to.value]
+            output_div.innerText = output_text.toString()
+        }
+    </script>
+</body>
+
+</html>

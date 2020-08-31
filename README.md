@@ -28,6 +28,6 @@ Lab solutions for full stack bootcamp.
 - [lab 03 Company](./solutions/html_css_Labs/lab3company.html)
 
 ## Javascript
-- [lab 01 Unit Converter](./solutions/Javascript/lab01.js)
+- [lab 01 Unit Converter](./solutions/Javascript/lab01.html)
 - [lab 02 Rock, Paper, Scissors](./solutions/Javascript/lab02.js)
 - [lab 03 Rot Encyptor](./solutions/Javascript/lab03.js)
