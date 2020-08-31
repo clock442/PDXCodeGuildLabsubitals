@@ -31,14 +31,14 @@ while True:
         '8': 'eighty',
         '9': 'ninety'
     }
-    user_num = input('What is your number: ')
+    user_num = int(input('What is your number: '))
     tens_digit = str(user_num//10)
     ones_digit = str(user_num%10)
     if user_num < 20:
         user_string = str(user_num)
         if user_string in under_twenty:
             print(under_twenty[user_string])
-    elif user_num > 19:
+    elif 19 < user_num < 100:
         if ones_digit != '0':
             print(f'{tens_place[tens_digit]}-{under_twenty[ones_digit]}')
         else:
