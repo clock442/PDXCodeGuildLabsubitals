@@ -12,13 +12,16 @@
         .completed {
             text-decoration: line-through;
         }
+        body {
+            margin: 10px;
+        }
     </style>
 </head>
 
 <body>
     <h1>To Do List</h1>
-    <input id="input_text" type="text" />
-    <button id="bt_add">Add to list</button>
+    <input id="input_text" type="text"/>
+    <button id="bt_add" class="btn btn-success">Add to list</button>
     <ul id="list_to_do"></ul>
 
     <script>
@@ -34,6 +37,16 @@
             let button_complete = $('<button>', { 'text': 'Complete', 'class': 'btn btn-primary' })
             button_complete.click(function () {
                 $(li).addClass('completed')
+                let x = true
+                // while (x === true) {
+                //     button_complete = $('<button>', { 'text': 'Undo', 'class': 'btn btn-secondary' })
+                //     button_complete.click(function () {
+                //         $(li).removeClass('.completed')
+                //         x = false
+                //     })
+                //     break
+                // }
+
             })
             li.append(button_complete)
             li.append(button_delete)
