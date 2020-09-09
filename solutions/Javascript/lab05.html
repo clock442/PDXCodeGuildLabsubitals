@@ -6,23 +6,36 @@
     <title>Lab 05</title>
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
-        h1 {
+        /* h1 {
             text-align: center;
-        }
+        } */
     </style>
 </head>
 <body>
     <div id="app">
         <!-- html goes here -->
-        <h1>Password Generator!</h1>
-        <input type="number" v-model="input_password_length"/>
-        <button v-on:click="genneratePasswords">Gennerate Passwords</button>
-        <ul id="list_output_passwords">
-            <li v-for="password in passwords">{{ password }}</li>
-        </ul>
-
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1>Password Generator!</h1>
+                    <input type="number" v-model="input_password_length"/>
+                    <button v-on:click="genneratePasswords" class="btn btn-success">Gennerate Passwords</button>
+                    <button v-on:click="clearPasswords" class="btn btn-danger">Clear</button>
+                    <ul id="list_output_passwords">
+                        <li v-for="password in passwords">{{ password }}</li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
     </div>
+
+
+
     <script>
         let alphabet = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+[{]}|0123456789*/.`
         let app = new Vue({
@@ -41,9 +54,15 @@
                         output_password += alphabet[Math.floor(Math.random()*alphabet.length)]
                     }
                     this.passwords.push(output_password)
+                },
+                clearPasswords: function() {
+                    this.passwords = []
                 }
             }
         })
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
