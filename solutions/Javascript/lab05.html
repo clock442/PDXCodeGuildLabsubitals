@@ -26,7 +26,10 @@
                     <button v-on:click="genneratePasswords" class="btn btn-success">Gennerate Passwords</button>
                     <button v-on:click="clearPasswords" class="btn btn-danger">Clear</button>
                     <ul id="list_output_passwords">
-                        <li v-for="password in passwords">{{ password }}</li>
+                        <li v-for="(password, index) in passwords">
+                            {{ password }}
+                            <button v-on:click="buttonCopy(index)" class="btn btn-secondary">Copy</button>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-3"></div>
@@ -57,6 +60,9 @@
                 },
                 clearPasswords: function() {
                     this.passwords = []
+                },
+                buttonCopy: function(index) {
+                    navigator.clipboard.writeText(this.passwords[index])
                 }
             }
         })
