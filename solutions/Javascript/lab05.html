@@ -37,7 +37,7 @@
                 // methods go here
                 genneratePasswords: function() {
                     let output_password = ''
-                    for (let i=0; i<=this.input_password_length; ++i) {
+                    for (let i=0; i<this.input_password_length; ++i) {
                         output_password += alphabet[Math.floor(Math.random()*alphabet.length)]
                     }
                     this.passwords.push(output_password)
