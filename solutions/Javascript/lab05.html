@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 05</title>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- html goes here -->
+        <h1>Password Generator!</h1>
+        <input type="number" v-model="input_password_length"/>
+        <button v-on:click="genneratePasswords">Gennerate Passwords</button>
+        <ul id="list_output_passwords">
+            <li v-for="password in passwords">{{ password }}</li>
+        </ul>
+
+    </div>
+    <script>
+        let alphabet = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+[{]}|0123456789*/.`
+        let app = new Vue({
+            el: '#app',
+            data: {
+                // data goes here
+                input_password_length: 0,
+                passwords: [],
+
+            },
+            methods: {
+                // methods go here
+                genneratePasswords: function() {
+                    let output_password = ''
+                    for (let i=0; i<=this.input_password_length; ++i) {
+                        output_password += alphabet[Math.floor(Math.random()*alphabet.length)]
+                    }
+                    this.passwords.push(output_password)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
