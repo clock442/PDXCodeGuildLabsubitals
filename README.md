@@ -33,3 +33,4 @@ Lab solutions for full stack bootcamp.
 - [lab 03 Rot Encyptor](./solutions/Javascript/lab03.js)
 - [lab 04 To Do List](./solutions/Javascript/lab04.html)
 - [lab 05 Password Gen with Vue](./solutions/Javascript/lab05.html)
+- [lab 06 Cat API](./solutions/Javascript/lab06.html)

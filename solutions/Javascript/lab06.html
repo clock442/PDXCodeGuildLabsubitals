@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .catPicClass {
+            margin: 10px;
+            padding: 5px;
+        }
+        #row_cat_pic {
+            justify-content: center;
+        }
+        #col_buttons {
+            display: flex;
+            align-items: flex-end;
+        }
+        #row_bottom {
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- html goes here -->
+        <h1>Cat Pictures</h1>
+        <div class="container">
+            <div class="row" >
+                <div class="col-6" id="col_buttons">
+                    <button v-on:click="gennerateCat" class="btn btn-primary">Random Cat?</button>
+                </div>
+
+                <div class="col-6">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div v-for="(category, index) in list_cat_categories" class="btn-group mr-2" role="group" aria-label="First group">
+                            <button v-on:click="getCatInCategory(category)" type="button" class="btn btn-secondary">{{category.name}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="row_cat_pic">
+                <div class="col-lg-auto" >
+                    <img v-bind:src="cat_pic" class="catPicClass" />
+                </div>
+            </div>
+            <div class="row" id="row_bottom">
+                <button v-on:click="buttonCopy" class="btn btn-secondary">Copy Image Source</button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                // data goes here
+                cat_pic: '',
+                list_cat_categories: []
+            },
+            methods: {
+                // methods go here
+                gennerateCat: function() {
+                    axios({
+                        method: 'get',
+                        url: 'https://api.thecatapi.com/v1/images/search'
+                    }).then(response => {
+                        this.cat_pic = response.data[0].url                  
+                    })
+                },
+                gennerateCategories: function() {
+                    axios({
+                        method: 'get',
+                        url: 'https://api.thecatapi.com/v1/categories'
+                    }).then(response => {
+                        temp_list = []
+                        for (let i=0; i<response.data.length; ++i) {
+                            temp_list.push({name: response.data[i].name, id: response.data[i].id})
+                        }
+                        this.list_cat_categories = temp_list
+                        console.log(response.data[0].name)
+                        console.log(this.list_cat_categories[0])
+                    })
+                },
+                getCatInCategory: function(category) {
+                    axios({
+                        method: 'get',
+                        url: 'https://api.thecatapi.com/v1/images/search?category_ids=' + category.id
+                    }).then(response => {
+                        this.cat_pic = response.data[0].url
+                    })
+                },
+                buttonCopy: function(index) {
+                    navigator.clipboard.writeText(this.cat_pic)
+                }
+            },
+            created: function () {
+                this.gennerateCat()
+                this.gennerateCategories()
+            }
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
