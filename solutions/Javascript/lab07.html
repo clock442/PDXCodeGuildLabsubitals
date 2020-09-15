@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios.js -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="secrets.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        h1 {
+            text-align: center;
+        }
+        /* #row_inputs #col_weather_btn{
+            display: flex;
+            align-items: flex-end;
+        } */
+        #col_weather_btn button {
+            margin-top:50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="row">
+            <h1>Weather Finder</h1>
+        </div>
+
+        <div class="row" id="row_inputs">
+            <div class="col s5">
+                <h3>Latitude</h3>
+                <input type="number" v-model="latitude" />
+            </div>
+            <div class="col s2" id="col_weather_btn">
+                <button v-on:click="getWeatherCurrent" class="btn waves-effect waves-light">Get Current Weather</button>
+            </div>
+            <div class="col s5">
+                <h3>Longitude</h3>
+                <input type="number" v-model="longitude" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div><img v-bind:src="current_weather_image_url"/></div>
+            <div><b>Weather</b>: {{this.weather_current.current_description}}</div>
+            <div><b>Temp</b>: {{this.weather_current.current_temp}} F</div>
+            <div><b>Feels Like</b>: {{this.weather_current.current_feels_like}} F</div>
+            <div><b>Pressure</b>: {{this.weather_current.current_pressure}} hPa</div>
+            <div><b>Wind Speed</b>: {{this.weather_current.current_wind_speed}} Mph</div>
+            <div><b>Humidity</b>: {{this.weather_current.current_humidity}}%</div>
+            <div><b>Time Zone</b>: {{this.weather_current.current_timezone}}</div>
+            <div><b>Date</b>: {{this.weather_current.current_date_time}}</div>
+        </div>
+
+        <div class="row" id="row_inputs">
+            
+                
+            <input type="text" v-model="input_city" />
+            
+            
+            <button v-on:click="getWeatherCity" class="btn waves-effect waves-light">Get Weather</button>
+            
+        </div>
+
+        <div class="row">
+            <div><img v-bind:src="city_weather_image_url"/></div>
+            <div><b>City</b>: {{this.weather_city.city_name}}</div>
+            <div><b>Weather</b>: {{this.weather_city.city_description}}</div>
+            <div><b>Temp</b>: {{this.weather_city.city_temp}} F</div>
+            <div><b>Feels Like</b>: {{this.weather_city.city_feels_like}} F</div>
+            <div><b>Pressure</b>: {{this.weather_city.city_pressure}} hPa</div>
+            <div><b>Wind Speed</b>: {{this.weather_city.city_wind_speed}} Mph</div>
+            <div><b>Humidity</b>: {{this.weather_city.city_humidity}}%</div>
+            <div><b>Date</b>: {{this.weather_city.city_date_time}}</div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                latitude: 0,
+                longitude: 0,
+                weather_current: {},
+                current_weather_image_url: '',
+                weather_city: {},
+                city_weather_image_url: '',
+                input_city: '',
+            },
+            methods: {
+                getWeatherCurrent: function () {
+                    axios({
+                        method: 'get',
+                        url: 'https://api.openweathermap.org/data/2.5/onecall',
+                        params: {
+                            lat: this.latitude,
+                            lon: this.longitude,
+                            appid: weather_api_key,
+                            exclude: 'minutely,hourly',
+                            units: 'imperial',
+                        }
+                    }).then(response => {
+                        console.log(response.data)
+                        let current_weather_data = response.data.current
+                        let datetime = new Date(current_weather_data.dt*1000)
+                        this.weather_current = {
+                            current_temp: current_weather_data.temp,
+                            current_pressure: current_weather_data.pressure,
+                            current_feels_like: current_weather_data.feels_like,
+                            current_wind_speed: current_weather_data.wind_speed,
+                            current_humidity: current_weather_data.humidity,
+                            current_timezone: response.data.timezone,
+                            current_description: current_weather_data.weather[0].main,
+                            current_date_time: datetime,
+                            current_icon_id: current_weather_data.weather[0].icon,
+                        }
+                        this.current_weather_image_url = 'http://openweathermap.org/img/wn/' + this.weather_current.current_icon_id + '.png'
+                    })
+                },
+
+                getWeatherCity: function () {
+                    axios({
+                        method: 'get',
+                        url: 'https://api.openweathermap.org/data/2.5/weather',
+                        params: {
+                            q: this.input_city,
+                            appid: weather_api_key,
+                            units: 'imperial',
+                        }
+                    }).then(response => {
+                        console.log(response.data)
+                        let city_weather_data = response.data
+                        let datetime = new Date(city_weather_data.dt*1000)
+                        this.weather_city = {
+                            city_name: city_weather_data.name,
+                            city_temp: city_weather_data.main.temp,
+                            city_pressure: city_weather_data.main.pressure,
+                            city_feels_like: city_weather_data.main.feels_like,
+                            city_wind_speed: city_weather_data.wind.speed,
+                            city_humidity: city_weather_data.main.humidity,
+                            city_description: city_weather_data.weather[0].main,
+                            city_date_time: datetime,
+                            city_icon_id: city_weather_data.weather[0].icon,
+                        }
+                        this.city_weather_image_url = 'http://openweathermap.org/img/wn/' + this.weather_city.city_icon_id + '.png'
+                    })
+                }
+            },
+            created: function () {
+                navigator.geolocation.getCurrentPosition(position => {
+                    this.latitude = position.coords.latitude
+                    this.longitude = position.coords.longitude
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
