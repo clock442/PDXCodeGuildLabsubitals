@@ -35,3 +35,4 @@ Lab solutions for full stack bootcamp.
 - [lab 05 Password Gen with Vue](./solutions/Javascript/lab05.html)
 - [lab 06 Cat API](./solutions/Javascript/lab06.html)
 - [lab 07 Weather](./solutions/Javascript/lab07.html)
+- [lab 07 Quiz](./solutions/Javascript/lab08.html)
