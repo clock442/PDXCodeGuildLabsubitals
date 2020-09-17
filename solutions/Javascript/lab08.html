@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+        integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+        crossorigin="anonymous"></script>
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <select class="browser-default" v-model='current_category'>
+                <option value="any">Any Category</option>
+                <option value="9">General Knowledge</option>
+                <option value="10">Entertainment: Books</option>
+                <option value="11">Entertainment: Film</option>
+                <option value="12">Entertainment: Music</option>
+                <option value="13">Entertainment: Musicals &amp; Theatres</option>
+                <option value="14">Entertainment: Television</option>
+                <option value="15">Entertainment: Video Games</option>
+                <option value="16">Entertainment: Board Games</option>
+                <option value="17">Science &amp; Nature</option>
+                <option value="18">Science: Computers</option>
+                <option value="19">Science: Mathematics</option>
+                <option value="20">Mythology</option>
+                <option value="21">Sports</option>
+                <option value="22">Geography</option>
+                <option value="23">History</option>
+                <option value="24">Politics</option>
+                <option value="25">Art</option>
+                <option value="26">Celebrities</option>
+                <option value="27">Animals</option>
+                <option value="28">Vehicles</option>
+                <option value="29">Entertainment: Comics</option>
+                <option value="30">Science: Gadgets</option>
+                <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
+                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+            </select>
+            <button v-on:click="getQuiz" class="btn waves-effect waves-light">Get Quiz</button>
+    
+            <div>
+                <div v-for="(question, index) in quiz">
+                    <div v-html="'Question ' + (index + 1) + ' ' + question.question"></div>
+    
+                    <div v-for="(answer, i) in question.answers">
+                        
+                        <p>
+                            <label>
+                            <input v-bind:id="'question' + index + '_answer' + i" v-bind:name="'group' + index" type="radio" 
+                                v-bind:value="answer" v-model="question.selected_answer" />
+                            <span v-html="answer.text"></span>
+                            </label>
+                        </p>
+                        
+                    </div>
+    
+                    
+                </div>
+                <div>
+                    <button v-on:click="gradeQuiz" class="btn waves-effect waves-light">Grade Quiz</button>
+                </div>
+    
+                <div id="grading_div">{{grading}}</div>
+
+                <div v-show="wrong_guesses.length > 0" v-for="(wrong_question, j) in wrong_guesses">
+
+                    <div v-html="'Question ' + (wrong_question + 1) + ' ' + quiz[wrong_question].question"></div>
+
+                    <div v-for="(answer, k) in quiz[wrong_question].answers">
+                        <p>
+                            <label>
+                            <input v-bind:name="'question' + j +'group' + k" type="radio" 
+                                v-bind:value="answer" v-model="quiz[wrong_question].selected_answer" disabled="disabled"/>
+                            <span v-html="answer.text"></span>
+                            </label>
+                        </p>
+
+                    </div>
+                </div>
+                <button v-on:click="clearAnswers" class="btn waves-effect waves-light">Clear</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                current_category: '',
+                quiz: [],
+                score: 0,
+                wrong_guesses: [],
+                grading: '',
+
+            },
+            methods: {
+                getQuiz: function () {
+                    axios({
+                        method: 'get',
+                        url: 'https://opentdb.com/api.php',
+                        params: {
+                            amount: '10',
+                            category: this.current_category,
+                            type: 'multiple',
+                        }
+                    }).then(response => {
+                        let results = response.data.results
+                        let temp_quiz = []
+                        for (let i = 0; i < results.length; ++i) {
+                            temp_quiz.push({
+                                question: results[i].question,
+                                answers: [{
+                                    text: results[i].correct_answer,
+                                    value: true,
+                                },{
+                                    text: results[i].incorrect_answers[0],
+                                    value: false,
+                                },{
+                                    text: results[i].incorrect_answers[1],
+                                    value: false,
+                                },{
+                                    text: results[i].incorrect_answers[2],
+                                    value: false,
+                                }],
+                                selected_answer: false,
+                            })
+                            let temp_array = temp_quiz[i].answers
+                            let j = 0
+                            let L = null
+                            for (let k=0; k<temp_array.length; ++k) {
+                                j = Math.floor(Math.random()*temp_array.length)
+                                L = temp_array[k]
+                                temp_array[k] = temp_array[j]
+                                temp_array[j] = L
+                            }
+                            temp_quiz[i].answers = temp_array
+                        }
+                        
+                        this.quiz = temp_quiz
+                        this.grading = ''
+                        console.log(this.quiz)
+                    })
+                },
+                gradeQuiz: function(){
+                    let array_wrong_guesses = []
+                    for (let i=0; i<this.quiz.length; ++i) {
+                        if (!this.quiz[i].selected_answer.value) {
+                            array_wrong_guesses.push(i)
+                        }
+                    }
+                    this.score = 10 - array_wrong_guesses.length
+                    this.wrong_guesses = array_wrong_guesses
+                    let output_string = 'Your score was ' + this.score +  '. You got ' + array_wrong_guesses + ' wrong.'
+                    this.grading = output_string
+                },
+                clearAnswers: function(){
+                    this.wrong_guesses = []
+                }
+            },
+            created: function () {
+                this.getQuiz()
+            }
+        })
+    </script>
+</body>
+
+</html>
