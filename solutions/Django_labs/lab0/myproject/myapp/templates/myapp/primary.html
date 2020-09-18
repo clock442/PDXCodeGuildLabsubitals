@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Lab 0</title>
+</head>
+<body>
+    <ul>
+        {% for blog_post in blog_posts %}
+        <li>{{ blog_post.title }}</li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
