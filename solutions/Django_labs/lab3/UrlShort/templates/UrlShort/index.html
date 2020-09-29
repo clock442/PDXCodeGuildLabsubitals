@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>URL Shortener</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Url Shortener</h1>
+
+        <form method="POST" action="{% url 'urlshort:save' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="input-url">URL</label>
+                <input type="text" class="form-control" id="input-url" placeholder="Your URL" name="input_url">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Short URL</th>
+                    <th scope="col">Actual URL</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url_item in url_items %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>/shortener/{{url_item.code}}</td>
+                    <td title="{{url_item.url}}">{{url_item.url| truncatechars:30}}</td>
+                    <td>
+                        <a href="{% url 'urlshort:delete' url_item.id %}" class="btn btn-danger">Delete</a>
+                        <button id="copy_btn{{ forloop.counter }}" class="btn btn-secondary">Copy</button>
+                        <script>
+                            let copy_btn{{ forloop.counter }} = document.querySelector('#copy_btn{{ forloop.counter}}')
+                            copy_btn{{ forloop.counter }}.onclick = function() {
+                                navigator.clipboard.writeText('{{ url_item.url }}')
+                            }
+                        </script>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
