@@ -36,3 +36,6 @@ Lab solutions for full stack bootcamp.
 - [lab 06 Cat API](./solutions/Javascript/lab06.html)
 - [lab 07 Weather](./solutions/Javascript/lab07.html)
 - [lab 08 Quiz](./solutions/Javascript/lab08.html)
+  
+## Django
+- [lab 03 URL Shortener](./solutions/Django_labs/lab3)
