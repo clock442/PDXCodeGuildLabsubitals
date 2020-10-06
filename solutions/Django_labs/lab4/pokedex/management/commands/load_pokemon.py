@@ -23,6 +23,6 @@ class Command(BaseCommand):
                 pokemon_type, created = PokemonType.objects.get_or_create(
                     name=type_name
                 )
-                pokemon.types.add(pokemon_type)
+                pokemon.types.add([pokemon_type])
 
             pokemon.save()

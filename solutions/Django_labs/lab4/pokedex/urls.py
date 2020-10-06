@@ -5,4 +5,5 @@ app_name = 'pokedex'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('info/<text:pokemon_name>/', views.info, name='info')
 ]

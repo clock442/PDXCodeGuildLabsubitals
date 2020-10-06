@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .pokename {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Pokedex</h1>
+        <a href="{% url 'pokedex:index' %}">Home</a>
+
+        <form method="GET" action="">
+            <div class="form-group">
+                <label for="search-pokemon">Search Pokemon</label>
+                <input type="text" class="form-control" id="search-pokemon" placeholder="Search for a pokemon" name="search_pokemon">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Img</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pokemon in pokemons %}
+                <tr>
+                    <th scope="row">{{ pokemon.number }}</th>
+                    <td class="pokename">{{pokemon.name}}</td>
+                    <td>
+                        {% for type in pokemon.types.all %}
+                        {{ type }}
+
+                        {% endfor %}
+                    
+                    </td>
+                    <td><img src="{{ pokemon.image_front }}"/></td>
+                    <td>
+                        <button class="btn btn-secondary"><a src="{% url 'pokedex:info' pokemon.name %}">Info</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
