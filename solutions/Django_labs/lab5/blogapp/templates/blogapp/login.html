@@ -1,0 +1,14 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+<div class="container">
+        <h3>Login</h3>
+
+        {% load bootstrap %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|bootstrap}}
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}

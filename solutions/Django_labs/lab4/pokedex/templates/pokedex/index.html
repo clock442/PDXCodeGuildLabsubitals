@@ -52,7 +52,7 @@
                     </td>
                     <td><img src="{{ pokemon.image_front }}"/></td>
                     <td>
-                        <button class="btn btn-secondary"><a src="{% url 'pokedex:info' pokemon.name %}">Info</a></button>
+                        <button class="btn btn-secondary"><a href="{% url 'pokedex:info' pokemon.name %}">Info</a></button>
                     </td>
                 </tr>
                 {% endfor %}

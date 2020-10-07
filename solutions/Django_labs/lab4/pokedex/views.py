@@ -11,7 +11,8 @@ def index(request):
     if search_pokemon != '':
         pokemons = pokemons.filter(Q(name__icontains=search_pokemon)
                                     | Q(number__icontains=search_pokemon)
-                                    | Q(height__icontains=search_pokemon))
+                                    | Q(height__icontains=search_pokemon)
+                                    | Q(types__name__icontains=search_pokemon))
 
     context = {
         'pokemons': pokemons,
@@ -20,7 +21,7 @@ def index(request):
 
 
 def info(request, pokemon_name):
-    poke_info = request.GET['pokemon_name']
+    poke_info = Pokemon.objects.get(name=pokemon_name)
     poke_name = poke_info.name
     poke_number = poke_info.number
     poke_height = poke_info.height
