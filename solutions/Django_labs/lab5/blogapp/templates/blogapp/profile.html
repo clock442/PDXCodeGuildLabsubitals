@@ -1,9 +1,51 @@
 {% extends 'blogapp/base.html' %}
 
 {% block content %}
+<div class="container">
+    <h2>
+        Welcome {{ user.username }} to your profile
+    </h2>
+    <br />
+    <h3>Your Posts</h3>
 
-<span>
-    Welcom {{ user.username }} to your profile
-</span>
+    {% for post in posts %}
+    <div class="card mb-3" style="max-width: 0 auto;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                {% if post.image.url %}
+                <img src="{{ post.image.url }}" class="card-img" alt="..."/>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">
+                        {{post.body}}
+                    </p>
+                    <p class="card-text"><small class="text-muted">{{post.date_created}}</small></p>
+                </div>
+            </div>
+            <div class="col-md-2" style="display: flex; justify-content: space-around; height: 40px;">
+                <button class="btn btn-secondary"><a href="{% url 'blogapp:edit' post.id %}">Edit</a></button> 
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {% endfor %}
+
+
+
+
+
+
+
+</div>
+
+
+
 
 {% endblock %}

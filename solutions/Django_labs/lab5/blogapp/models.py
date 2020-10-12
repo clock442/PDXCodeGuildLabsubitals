@@ -8,7 +8,7 @@ class User(AbstractUser):
 class BlogPost(models.Model):
     title = models.CharField(max_length=50)
     body = models.TextField()
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/', default='../uploaded_files/images/kitten150x100.jpg')
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='users')
     public = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)

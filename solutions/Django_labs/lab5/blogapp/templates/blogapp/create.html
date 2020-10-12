@@ -1,14 +1,16 @@
 {% extends 'blogapp/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <h3>Login</h3>
 
-    {% load bootstrap %}
+<div class="container">
+    <h3>Create a new Post</h3>
+
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form|bootstrap}}
-        <button class="btn btn-primary" type="submit">Login</button>
+        {{ form|crispy }}
+        <button class="btn btn-primary" type="submit">Create</button>
     </form>
 </div>
+
 {% endblock %}

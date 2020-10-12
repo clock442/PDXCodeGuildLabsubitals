@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogapp',
     'bootstrapform',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ AUTH_USER_MODEL = 'blogapp.User'
 
 MEDIA_URL = '/uploaded_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
+
+LOGIN_URL = '/blog/login/'

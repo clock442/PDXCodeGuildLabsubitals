@@ -1,7 +1,7 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import UserForm, LoginForm
-from .models import User
+from .forms import UserForm, LoginForm, BlogPostForm
+from .models import User, BlogPost
 from django.contrib.auth.decorators import login_required
 import django.contrib.auth
 import requests
@@ -71,6 +71,53 @@ def login_vue(request):
 
 @login_required
 def profile(request):
-    print(request)
+    print(request.user.id)
 
-    return render(request, 'blogapp/profile.html')
+    posts = request.user.users.all()
+    print(posts[3].image)
+    print(posts[1])
+    print(posts)
+    print(posts[1].id)
+
+    context = {
+        'posts': posts,
+    }
+
+    return render(request, 'blogapp/profile.html', context)
+
+@login_required
+def create(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+
+            return HttpResponseRedirect(reverse('blogapp:profile'))
+        
+    else:
+        form = BlogPostForm()
+
+    return render(request, 'blogapp/create.html', {'form': form})
+
+@login_required
+def edit(request, post_id):
+    print(post_id)
+    post_object = get_object_or_404(BlogPost, id=post_id, user=request.user)
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES, instance=post_object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogapp:profile'))
+    
+    else:
+        form = BlogPostForm(instance=post_object)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'blogapp/edit.html', context)
+
