@@ -41,3 +41,4 @@ Lab solutions for full stack bootcamp.
 - [lab 03 URL Shortener](./solutions/Django_labs/lab3)
 - [lab 04 Pokedex](./solutions/Django_labs/lab4)
 - [lab 05 Blog](./solutions/Django_labs/lab5)
+- [lab 06 Library](./solutions/Django_labs/lab6)
