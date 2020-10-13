@@ -8,7 +8,11 @@ def index(request):
     return render(request, 'library/index.html')
 
 def books(request):
-    books = Book.objects.all()
+    book_list = Book.objects.order_by('year')
+    paginator = Paginator(book_list, 5)
+    page = request.GET.get('page')
+    books = paginator.page(page)
+    pag_pages = paginator.num_pages
     data = []
     for book in books:
         data.append({
@@ -23,15 +27,19 @@ def books(request):
             'language': book.language
         })
 
-    return JsonResponse({'books': data})
+    return JsonResponse({'books': data, 'pag_pages': pag_pages})
 
 
 def search(request):
     text = request.GET['text']
-    books = Book.objects.all()
+    books = Book.objects.order_by('year')
     search_books = books.filter(Q(title__icontains=text) | Q(author__icontains=text))
+    paginator = Paginator(search_books, 5)
+    page = request.GET.get('page')
+    books = paginator.page(page)
+    pag_pages = paginator.num_pages
     data = []
-    for book in search_books:
+    for book in books:
         data.append({
             'id': book.id,
             'title': book.title,
@@ -45,4 +53,4 @@ def search(request):
         })
 
 
-    return JsonResponse({'search_books': data})
+    return JsonResponse({'search_books': data, 'pag_pages': pag_pages})

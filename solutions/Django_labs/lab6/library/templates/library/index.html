@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
         integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .pag_row {
+            align-items: center;
+        }
+    </style>
 
 </head>
 
@@ -25,7 +31,7 @@
                 <label class="active" for="search_box">Search</label>
             </div>
             <div class="col s2">
-                <a class="waves-effect waves-light btn" v-on:click="search">Go!</a>
+                <a class="waves-effect waves-light btn" v-on:click="searchPrimary">Go!</a>
             </div>
         </div>
 
@@ -56,6 +62,15 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="pagination">
+                    <li class="disabled"><a v-on:click="lastPage"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a>[[this.page]]</a></li>
+                    <li class="waves-effect"><a v-on:click="nextPage"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col s12">
@@ -74,14 +89,19 @@
                 books: [],
                 input_search_text: '',
                 page: 1,
+                pag_pages: 1,
             },
             methods: {
                 getBooks: function () {
                     axios({
                         url: '{% url "library:books" %}',
-                        method: 'get'
+                        method: 'get',
+                        params: {
+                            page: this.page
+                        }
                     }).then(response => {
                         this.books = response.data.books
+                        this.pag_pages = response.data.pag_pages
                     })
                 },
                 search: function () {
@@ -94,7 +114,21 @@
                         }
                     }).then(response => {
                         this.books = response.data.search_books
+                        this.pag_pages = response.data.pag_pages
                     })
+                },
+                nextPage: function() {
+                    this.page = this.page + 1
+                    this.search()
+                },
+                lastPage: function() {
+                    this.page = this.page - 1
+                    this.search()
+                    console.log(this.books)
+                },
+                searchPrimary: function() {
+                    this.page = 1
+                    this.search()
                 }
 
             },
