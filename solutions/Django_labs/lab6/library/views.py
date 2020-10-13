@@ -15,7 +15,7 @@ def books(request):
             'id': book.id,
             'title': book.title,
             'author': book.author,
-            'image': book.image,
+            'image': 'https://raw.githubusercontent.com/PdxCodeGuild/class_mountain_goat/master/4%20Django/labs/images/' + book.image,
             'year': book.year,
             'pages': book.pages,
             'url': book.url,
@@ -28,7 +28,6 @@ def books(request):
 
 def search(request):
     text = request.GET['text']
-    print(text)
     books = Book.objects.all()
     search_books = books.filter(Q(title__icontains=text) | Q(author__icontains=text))
     data = []
@@ -37,14 +36,13 @@ def search(request):
             'id': book.id,
             'title': book.title,
             'author': book.author,
-            'image': book.image,
+            'image': 'https://raw.githubusercontent.com/PdxCodeGuild/class_mountain_goat/master/4%20Django/labs/images/' + book.image,
             'year': book.year,
             'pages': book.pages,
             'url': book.url,
             'country': book.country,
             'language': book.language
         })
-
 
 
     return JsonResponse({'search_books': data})
