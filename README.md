@@ -1,4 +1,4 @@
-# PDXCodeGuildLabsubitals
+# PDXCodeGuildLabsubmitals
 Lab solutions for full stack bootcamp. 
 
 ## Python Solutions
