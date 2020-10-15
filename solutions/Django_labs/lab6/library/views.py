@@ -51,6 +51,6 @@ def search(request):
             'country': book.country,
             'language': book.language
         })
-
+# jef
 
     return JsonResponse({'search_books': data, 'pag_pages': pag_pages})
